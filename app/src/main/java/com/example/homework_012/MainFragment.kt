@@ -6,26 +6,35 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
+import com.example.homework_012.databinding.MainFragmentBinding
+import org.json.JSONObject
 
 class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
-    private lateinit var viewModel: MainViewModel
+    private var binding: MainFragmentBinding? = null
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+
+        binding = MainFragmentBinding.inflate(inflater, container, false)
+
+        viewModel.jsParsed()
+
+        binding?.text?.text = viewModel.someText
+
+
+
+
+        return binding?.root
+
+
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }
