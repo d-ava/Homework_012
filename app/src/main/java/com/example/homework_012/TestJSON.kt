@@ -4,13 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class TestJSON(
 
-    val id: String,
+    val id: String?,
     val projectId: String?,
-    val equipmentId: String,
-    val status: String,
-    val requestedBy: String,
+    val equipmentId: String?,
+    val status: String?,
+    val requestedBy: String?,
     val acceptedBy: String? = null,
-    val author: String,
+    val author: String?,
+
+
     val category: String,
     val locations: Locations,
     val filters: List<Filters>,
@@ -170,7 +172,7 @@ data class TestJSON(
     )
     data class Location(
         val type:String,
-        val coordinates : List<List<List<List<Double>>>>,
+        val coordinates : List<List<List<List<String>>>>,
 
     )
 }

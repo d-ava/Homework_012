@@ -14,27 +14,34 @@ import org.json.JSONObject
 class MainFragment : Fragment() {
 
 
-    private var binding: MainFragmentBinding? = null
+    private var _binding: MainFragmentBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        binding = MainFragmentBinding.inflate(inflater, container, false)
+        _binding = MainFragmentBinding.inflate(inflater, container, false)
 
-        viewModel.jsParsed()
+        return binding.root
 
-        binding?.text?.text = viewModel.someText
+   }
 
-
-
-
-        return binding?.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
 
+        binding.btnParse.setOnClickListener {
+            binding.tVText.text=viewModel.parsedJSON().toString()
+        }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    _binding = null
+    }
 
 }
